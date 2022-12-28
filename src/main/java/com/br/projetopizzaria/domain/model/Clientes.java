@@ -4,23 +4,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
-@Entity(name = "Clientes")
+@Entity(name = "clientes")
 public class Clientes {
 	@Id
-	@GeneratedValue
 	private long id;
 	private String nome;
 	private String sobrenome;
 	private String telefone;
 	
-	public Clientes(long id, String nome, String sobrenome, String telefone) {
-		super();
-		this.id = id;
-		this.nome = nome;
-		this.sobrenome = sobrenome;
-		this.telefone = telefone;
-	}
-
 	public long getId() {
 		return id;
 	}
