@@ -1,17 +1,34 @@
-package com.br.projetopizzaria.domain.model;
+package com.br.projetopizzaria.model.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import java.io.Serializable;
 
-@Entity(name = "clientes")
-public class Clientes {
-	@Id
+public class Clientes implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
+	
 	private long id;
 	private String nome;
 	private String sobrenome;
 	private String telefone;
 	
+	
+	public Clientes(long id, String nome, String sobrenome, String telefone) {
+		this.id = id;
+		this.nome = nome;
+		this.sobrenome = sobrenome;
+		this.telefone = telefone;
+	}
+	public Clientes(String nome, String sobrenome, String telefone) {
+		this.nome = nome;
+		this.sobrenome = sobrenome;
+		this.telefone = telefone;
+	}
+	
+	
+	public Clientes(){
+		
+	}
+
 	public long getId() {
 		return id;
 	}
