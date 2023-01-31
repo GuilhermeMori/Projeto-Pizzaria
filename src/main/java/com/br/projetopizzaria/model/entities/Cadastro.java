@@ -2,38 +2,38 @@ package com.br.projetopizzaria.model.entities;
 
 import java.io.Serializable;
 
-public class Clientes implements Serializable{
+public class Cadastro implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
-	private long id;
+	private Integer id;
 	private String nome;
 	private String sobrenome;
 	private String telefone;
 	
 	
-	public Clientes(long id, String nome, String sobrenome, String telefone) {
+	public Cadastro(Integer id, String nome, String sobrenome, String telefone) {
 		this.id = id;
 		this.nome = nome;
 		this.sobrenome = sobrenome;
 		this.telefone = telefone;
 	}
-	public Clientes(String nome, String sobrenome, String telefone) {
+	public Cadastro(String nome, String sobrenome, String telefone) {
 		this.nome = nome;
 		this.sobrenome = sobrenome;
 		this.telefone = telefone;
 	}
 	
 	
-	public Clientes(){
+	public Cadastro(){
 		
 	}
 
-	public long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

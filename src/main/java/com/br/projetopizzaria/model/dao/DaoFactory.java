@@ -1,11 +1,11 @@
 package com.br.projetopizzaria.model.dao;
 
 import com.br.projetopizzaria.db.Db;
-import com.br.projetopizzaria.model.dao.impl.ClientesDaoJDBC;
+import com.br.projetopizzaria.model.dao.impl.CadastroDaoJDBC;
 
 public class DaoFactory {
 
-	public static ClientesDao createClientesDao() {
-		return new ClientesDaoJDBC(Db.getConecction());
+	public static CadastroDao createClientesDao() {
+		return new CadastroDaoJDBC(Db.getConecction());
 	}
 }
