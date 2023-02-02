@@ -14,7 +14,7 @@ public class Main extends Application {
 	
 	public void start(Stage primaryStage) {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/MainClientes.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/MainIngredientes.fxml"));
 			Parent parent = loader.load();
 			
 			

@@ -63,7 +63,6 @@ public class CadastroController implements Initializable{
 	
 	private List<DataChangeListener> dataChangeListeners = new ArrayList<>();
 	
-	
 	public void setCadastro(Cadastro entity) {
 		this.entity = entity;
 	}
