@@ -4,7 +4,7 @@ CRUD De novos Sabores de pizza, CRUD de ingredientes, realizar um pedido de pizz
 
 ### Projeto em andamento 👷🏼‍♂️
 ✅ CRUD cadastro de Clientes <br>
-⚠️ CRUD cadastro de ingredientes <br>
+✅ CRUD cadastro de ingredientes <br>
 ⚠️ CRUD cadastro de sabores<br>
 ⚠️ Realizar pedido <br>
 
