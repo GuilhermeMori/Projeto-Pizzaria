@@ -1,6 +1,10 @@
 package com.br.projetopizzaria.model.entities;
 
-public class Ingredientes {
+import java.io.Serializable;
+
+public class Ingredientes implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 	
 	private Integer id;
 	private String descricao;
@@ -35,7 +39,12 @@ public class Ingredientes {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	
-	
 
+	@Override
+	public String toString() {
+		return descricao;
+	}
+	
+	
+	
 }
