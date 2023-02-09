@@ -88,6 +88,11 @@ public class CadastroController implements Initializable{
 			entity = getFormData();
 			service.saveOrUpdate(entity);
 			notifyDataChangeListeners();
+			 Alert alert = new Alert(Alert.AlertType.INFORMATION);
+			    alert.setTitle("Novo Cliente Adicionado");
+			    alert.setHeaderText("");
+			    alert.setContentText("Um novo cliente foi adicionado.");
+			    alert.showAndWait();
 			Utils.currentStage(event).close();
 		}
 		catch (ValidationException e) {

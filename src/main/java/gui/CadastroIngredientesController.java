@@ -77,6 +77,11 @@ public class CadastroIngredientesController implements Initializable {
 			entity = getFormData();
 			service.saveOrUpdate(entity);
 			notifyDataChangeListeners();
+			 Alert alert = new Alert(Alert.AlertType.INFORMATION);
+			    alert.setTitle("Novo Ingrediente Adicionado");
+			    alert.setHeaderText("");
+			    alert.setContentText("Um Ingrediente foi adicionado.");
+			    alert.showAndWait();
 			Utils.currentStage(event).close();
 		}
 		catch (ValidationException e) {

@@ -59,35 +59,7 @@ public class CadastroDaoJDBC  implements CadastroDao{
 		}
 	}
 
-	@Override
-	public List<Cadastro> findAll() {
-		PreparedStatement st = null;
-		ResultSet rs = null;
-		try {
-			st = conn.prepareStatement(
-				"SELECT * FROM Clientes");
-			rs = st.executeQuery();
-
-			List<Cadastro> list = new ArrayList<>();
-
-			while (rs.next()) {
-				Cadastro obj = new Cadastro();
-				obj.setId(rs.getInt("Id"));
-				obj.setNome(rs.getString("Nome"));
-				obj.setSobrenome(rs.getString("Sobrenome"));
-				obj.setTelefone(rs.getNString("telefone"));
-				list.add(obj);
-			}
-			return list;
-		}
-		catch (SQLException e) {
-			throw new DbException(e.getMessage());
-		}
-		finally {
-			Db.closeStatement(st);
-			Db.closeResultSet(rs);
-		}
-	}
+	
 	@Override
 	public void update(Cadastro clientes) {
 		PreparedStatement st = null;
@@ -132,5 +104,33 @@ public class CadastroDaoJDBC  implements CadastroDao{
 		}
 	}
 
+	@Override
+	public List<Cadastro> findAll() {
+		PreparedStatement st = null;
+		ResultSet rs = null;
+		try {
+			st = conn.prepareStatement(
+				"SELECT * FROM Clientes");
+			rs = st.executeQuery();
 
+			List<Cadastro> list = new ArrayList<>();
+
+			while (rs.next()) {
+				Cadastro obj = new Cadastro();
+				obj.setId(rs.getInt("Id"));
+				obj.setNome(rs.getString("Nome"));
+				obj.setSobrenome(rs.getString("Sobrenome"));
+				obj.setTelefone(rs.getNString("telefone"));
+				list.add(obj);
+			}
+			return list;
+		}
+		catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally {
+			Db.closeStatement(st);
+			Db.closeResultSet(rs);
+		}
+	}
 }

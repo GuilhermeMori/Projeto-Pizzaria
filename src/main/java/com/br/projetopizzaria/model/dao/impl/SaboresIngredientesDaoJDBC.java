@@ -11,6 +11,7 @@ import java.util.List;
 import com.br.projetopizzaria.db.Db;
 import com.br.projetopizzaria.db.DbException;
 import com.br.projetopizzaria.model.dao.SaboresIngredientesDao;
+import com.br.projetopizzaria.model.entities.Cadastro;
 import com.br.projetopizzaria.model.entities.SaboresIngredientes;
 
 public class SaboresIngredientesDaoJDBC implements SaboresIngredientesDao{
@@ -27,13 +28,16 @@ public class SaboresIngredientesDaoJDBC implements SaboresIngredientesDao{
 		try {
 			st = conn.prepareStatement(
 					"INSERT INTO Sabores_ingredientes "
-					+ "(Descricao, id_ingredientes)"
+					+ "(idingredientes1, idingredientes2, idingredientes3, idingredientes4,idingredientes5)"
 					+ "VALUES "
-					+ "(?,?)",
+					+ "(?,?,?,?,?)",
 					Statement.RETURN_GENERATED_KEYS);
 
-			st.setString(1, sabores.getDescricao().toString());
-			st.setLong(2,sabores.getIdIngredientes());
+			st.setInt(1, sabores.getIngredientes1());
+			st.setInt(2,sabores.getIngredientes2());
+			st.setInt(3,sabores.getIngredientes3());
+			st.setInt(4,sabores.getIngredientes4());
+			st.setInt(5,sabores.getIngredientes5());
 		
 	
 			int rowsAffected = st.executeUpdate();
@@ -63,12 +67,17 @@ public class SaboresIngredientesDaoJDBC implements SaboresIngredientesDao{
 		PreparedStatement st = null;
 		try {
 			st = conn.prepareStatement(
-					"UPDATE Sabores_Ingredientes "
-					+ "SET descricao = ?"
+					"UPDATE sabores_ingredientes "
+					+ "SET idingredientes1= ?, idingredientes2 = ?, idingredientes3 = ?, idingredientes4 = ?, idingredientes5 = ? "
 					+ "WHERE Id = ?");
 			
-			st.setString(1, sabores.getDescricao().toString());
-			st.setLong(2, sabores.getId());
+			st.setInt(1, sabores.getIngredientes1());
+			st.setInt(2, sabores.getIngredientes2());
+			st.setInt(3, sabores.getIngredientes3());
+			st.setInt(4, sabores.getIngredientes4());
+			st.setInt(5, sabores.getIngredientes5());
+			st.setInt(6, sabores.getId());
+
 			
 			st.executeUpdate();
 		}
@@ -106,7 +115,7 @@ public class SaboresIngredientesDaoJDBC implements SaboresIngredientesDao{
 		ResultSet rs = null;
 		try {
 			st = conn.prepareStatement(
-				"SELECT * FROM Sabores_Ingredientes");
+				"SELECT * FROM Sabores_ingredientes" );
 			rs = st.executeQuery();
 
 			List<SaboresIngredientes> list = new ArrayList<>();
@@ -114,8 +123,12 @@ public class SaboresIngredientesDaoJDBC implements SaboresIngredientesDao{
 			while (rs.next()) {
 				SaboresIngredientes obj = new SaboresIngredientes();
 				obj.setId(rs.getInt("Id"));
-				obj.setDescricao(rs.getString("Descricao"));
-				obj.setIdIngredientes(rs.getInt("id_ingredientes"));
+				obj.setIngredientes1(rs.getInt("idingredientes1"));
+				obj.setIngredientes2(rs.getInt("idingredientes2"));
+				obj.setIngredientes3(rs.getInt("idingredientes3"));
+				obj.setIngredientes4(rs.getInt("idingredientes4"));
+				obj.setIngredientes5(rs.getInt("idingredientes5"));
+				
 				list.add(obj);
 			}
 			return list;
@@ -128,5 +141,4 @@ public class SaboresIngredientesDaoJDBC implements SaboresIngredientesDao{
 			Db.closeResultSet(rs);
 		}
 	}
-
 }

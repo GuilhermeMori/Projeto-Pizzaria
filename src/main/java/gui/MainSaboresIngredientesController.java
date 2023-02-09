@@ -46,25 +46,31 @@ public class MainSaboresIngredientesController implements Initializable, DataCha
 	private Button btNovoSaborIngrediente;
 
 	@FXML
-	private Button btProcurar;
-
-	@FXML
 	private Button btEditar;
 
 	@FXML
 	private Button btAtualizar;
 
 	@FXML
-	private TableView<SaboresIngredientes> tableViewClientes;
+	private TableView<SaboresIngredientes> tableViewSaboresIngredientes;
 
 	@FXML
-	private TableColumn<SaboresIngredientes, Long> tableColumnId;
-
-	@FXML
-	private TableColumn<SaboresIngredientes, String> tableColumnDescricao;
+	private TableColumn<SaboresIngredientes, Integer> Id;
 	
 	@FXML
-	private TableColumn<SaboresIngredientes, Long> tableColumnIdIngredientes;
+	private TableColumn<SaboresIngredientes, Integer> Ingredientes1;
+	
+	@FXML
+	private TableColumn<SaboresIngredientes, Integer> Ingredientes2;
+	
+	@FXML
+	private TableColumn<SaboresIngredientes, Integer> Ingredientes3;;
+	
+	@FXML
+	private TableColumn<SaboresIngredientes, Integer> Ingredientes4;
+	
+	@FXML
+	private TableColumn<SaboresIngredientes, Integer> Ingredientes5;
 
 	@FXML
 	private TableColumn<SaboresIngredientes, SaboresIngredientes> tableColumnEdit;
@@ -87,26 +93,43 @@ public class MainSaboresIngredientesController implements Initializable, DataCha
 	@Override
 	public void onDataChanged() {
 		updateTableView();
-		pesquisarDados();	
+		pesquisarDados();
 	}
 
+	//Método utilizado ao iniciar o sistema.
 	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
+	public void initialize(URL url, ResourceBundle rb) {
 	initializeNodes();		
 	}
 	
-	public void initializeNodes() {
-		tableColumnId.setCellValueFactory(new PropertyValueFactory<SaboresIngredientes, Long>("id"));
-		tableColumnDescricao.setCellValueFactory(new PropertyValueFactory<SaboresIngredientes, String>("descricao"));
-		tableColumnIdIngredientes.setCellValueFactory(new PropertyValueFactory<SaboresIngredientes, Long>("idIngredientes"));
-		
+	//Irá chamar os metodos necessarios para alimentar a tabela saboresingredientes
+	public void initializeNodes() {	
+		Id.setCellValueFactory(new PropertyValueFactory<>("id"));
+		Ingredientes1.setCellValueFactory(new PropertyValueFactory<>("ingredientes1"));
+		Ingredientes2.setCellValueFactory(new PropertyValueFactory<>("ingredientes2"));
+		Ingredientes3.setCellValueFactory(new PropertyValueFactory<>("ingredientes3"));
+		Ingredientes4.setCellValueFactory(new PropertyValueFactory<>("ingredientes4"));
+		Ingredientes5.setCellValueFactory(new PropertyValueFactory<>("ingredientes5"));
+			
 		setSaboresIngredientesService(new SaboresIngredientesService());
 		updateTableView();
-		pesquisarDados();
 		initEditButtons();
 		initRemoveButtons();
 	}	
 	
+	//Atualizar tabela de saboresingredientes
+	public void updateTableView() {
+		setSaboresIngredientesService(new SaboresIngredientesService());
+		if (alterar == null) {
+			throw new IllegalStateException("Service was null");
+		}
+		List<SaboresIngredientes> list = alterar.findAll();
+		obsList = FXCollections.observableArrayList(list);
+		tableViewSaboresIngredientes.setItems(obsList);
+
+	}
+	
+	//Metodo para criar o botao de remover
 	private void initRemoveButtons() {
 		tableColumnRemove.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
 		tableColumnRemove.setCellFactory(param -> new TableCell<SaboresIngredientes, SaboresIngredientes>() {
@@ -124,7 +147,8 @@ public class MainSaboresIngredientesController implements Initializable, DataCha
 			}
 		});
 	}
-//
+
+	//Método para adicionar o botao de remover
 	private void removeEntity(SaboresIngredientes obj) {
 		Optional <ButtonType> result = Alerts.showConfirmation("Confirmação", "Você tem certeza que deseja deletar ?");
 		
@@ -142,40 +166,8 @@ public class MainSaboresIngredientesController implements Initializable, DataCha
 		}
 	}
 	
-	public void updateTableView() {
-		setSaboresIngredientesService(new SaboresIngredientesService());
-		if (alterar == null) {
-			throw new IllegalStateException("Service was null");
-		}
-		List<SaboresIngredientes> list = alterar.findAll();
-		obsList = FXCollections.observableArrayList(list);
-		tableViewClientes.setItems(obsList);
 
-	}
 	
-	//Pesquisa na tabela os dados informados na barra de pesquisa
-	public void pesquisarDados() {
-		FilteredList<SaboresIngredientes> filtrarDados = new FilteredList<>(obsList, b -> true);
-		txtProcurar.textProperty().addListener((observable, oldValue, newValue) -> {
-			filtrarDados.setPredicate(Ingredientes -> {
-
-				if (newValue.isEmpty() || newValue.isBlank() || newValue == null) {
-					return true;
-				}
-
-				String procuraTeclado = newValue.toLowerCase();
-				if (Ingredientes.getDescricao().toLowerCase().contains(procuraTeclado)) {
-					return true;
-				} else {
-					return false;
-				}
-				
-			});
-		});
-		SortedList<SaboresIngredientes> sortedData = new SortedList<>(filtrarDados);
-		sortedData.comparatorProperty().bind(tableViewClientes.comparatorProperty());
-		tableViewClientes.setItems(sortedData);	
-	}
 	
 	// Comando para criar o botao editar e abrir uma janela com os dados já
 	// preenchidos
@@ -205,7 +197,7 @@ public class MainSaboresIngredientesController implements Initializable, DataCha
 
 			CadastroSaboresController controller = loader.getController();
 			controller.setSabores(obj);
-			controller.setSaboresIngredientesService(alterar);
+			controller.setSaboresIngredientesService(new SaboresIngredientesService());
 			controller.subscribeDataChangeListener(this);
 			controller.updateFormData();
 
@@ -221,6 +213,37 @@ public class MainSaboresIngredientesController implements Initializable, DataCha
 			Alerts.showAlert("IO Excepetion", "Erro ao carregar a tela", e.getMessage(), AlertType.ERROR);
 		}
 	}
+
+	//Pesquisa na tabela os dados informados na barra de pesquisa
+	public void pesquisarDados() {
+		FilteredList<SaboresIngredientes> filtrarDados = new FilteredList<>(obsList, b -> true);
+		txtProcurar.textProperty().addListener((observable, oldValue, newValue) -> {
+			filtrarDados.setPredicate(SaboresIngredientes -> {
+
+				if (newValue.isEmpty() || newValue.isBlank() || newValue == null) {
+					return true;
+				}
+
+				// Realiza a buscas pelso 5 campos de id_ingredientes
+				String procuraTeclado = newValue.toLowerCase();
+				if (SaboresIngredientes.getIngredientes1().equals(Integer.valueOf(procuraTeclado))
+				||SaboresIngredientes.getIngredientes2().equals(Integer.valueOf(procuraTeclado))
+				||SaboresIngredientes.getIngredientes3().equals(Integer.valueOf(procuraTeclado))
+				||SaboresIngredientes.getIngredientes4().equals(Integer.valueOf(procuraTeclado))
+				||SaboresIngredientes.getIngredientes5().equals(Integer.valueOf(procuraTeclado))) {
+					return true;
+				} else {
+					return false;
+				}
+				
+			});
+		});
+		SortedList<SaboresIngredientes> sortedData = new SortedList<>(filtrarDados);
+		sortedData.comparatorProperty().bind(tableViewSaboresIngredientes.comparatorProperty());
+		tableViewSaboresIngredientes.setItems(sortedData);	
+	}
+
+
 	
 }
 

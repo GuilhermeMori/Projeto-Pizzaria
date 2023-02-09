@@ -46,9 +46,6 @@ public class MainClientesController implements Initializable, DataChangeListener
 	private Button btNovoCliente;
 
 	@FXML
-	private Button btProcurar;
-
-	@FXML
 	private Button btEditar;
 
 	@FXML

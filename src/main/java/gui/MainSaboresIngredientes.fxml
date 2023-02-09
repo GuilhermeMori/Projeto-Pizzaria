@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="302.0" prefWidth="608.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.MainSaboresIngredientesController">
+<VBox prefHeight="317.0" prefWidth="678.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.MainSaboresIngredientesController">
    <children>
       <Label text="SaboresIngredientes">
          <padding>
@@ -23,16 +23,19 @@
       <ToolBar prefHeight="40.0" prefWidth="200.0">
         <items>
           <Button fx:id="btNovoSaborIngrediente" mnemonicParsing="false" onAction="#onBtNovoSaboresIngrediente" text="Novo Ingrediente" />
-            <TextField fx:id="txtProcurar" prefHeight="26.0" prefWidth="284.0" promptText="Procurar cliente" />
+            <TextField fx:id="txtProcurar" onAction="#pesquisarDados" prefHeight="26.0" prefWidth="284.0" promptText="Procurar ID Ingredientes" />
         </items>
       </ToolBar>
-      <TableView fx:id="tableViewClientes" prefHeight="200.0" prefWidth="200.0">
+      <TableView fx:id="tableViewSaboresIngredientes" prefHeight="200.0" prefWidth="200.0">
         <columns>
-          <TableColumn fx:id="tableColumnId" prefWidth="75.0" text="Id" />
-          <TableColumn fx:id="tableColumnDescricao" prefWidth="175.19995880126953" text="Ingredientes" />
-            <TableColumn fx:id="tableColumnIdIngredientes" prefWidth="175.19995880126953" text="ID_Ingredientes" />
-            <TableColumn fx:id="tableColumnEdit" minWidth="0.0" prefWidth="103.20001220703125" text="Editar" />
-            <TableColumn fx:id="tableColumnRemove" prefWidth="98.4000244140625" text="Excluir" />
+          <TableColumn fx:id="Id" prefWidth="75.0" text="Id" />
+          <TableColumn fx:id="Ingredientes1" prefWidth="94.39996337890625" text="Ingredientes1" />
+            <TableColumn fx:id="Ingredientes2" prefWidth="83.20001220703125" text="Ingredientes2" />
+            <TableColumn fx:id="Ingredientes3" prefWidth="89.5999755859375" text="Ingredientes3" />
+            <TableColumn fx:id="Ingredientes4" prefWidth="89.5999755859375" text="Ingredientes4" />
+            <TableColumn fx:id="Ingredientes5" prefWidth="89.5999755859375" text="Ingredientes5" />
+            <TableColumn fx:id="tableColumnEdit" minWidth="0.0" prefWidth="84.79998779296875" text="Editar" />
+            <TableColumn fx:id="tableColumnRemove" prefWidth="70.39996337890625" text="Excluir" />
         </columns>
       </TableView>
    </children>
